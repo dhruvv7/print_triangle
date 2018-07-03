@@ -1,2 +1,5 @@
-# print_triangle
-First repo in git, to create a python app for printing triangles on screen
+This project is to develop a python programme for printing triangle shape on screen. 
+
+The shape and size will vary as per inputs. 
+
+More details in the python file
