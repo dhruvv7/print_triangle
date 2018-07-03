@@ -7,4 +7,4 @@
 #Usage: python3 print_triangle <size_in_integer> <type: 0 for right, 1 for equilateral>
 #       Both the arguments are optional. 
 
-
+#in branch
