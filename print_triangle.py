@@ -32,27 +32,29 @@ def print_triangle(triangle, rows):
 
 #main program starts here
 import sys
+#import argparse for using readymade argument parsing
+#tutorial at https://docs.python.org/3/howto/argparse.html
 
-triangle = 0 # variable to hold choice of right or equilateral 
-rows = 3 # variable to hold number of rows
+import argparse
+parser = argparse.ArgumentParser(description='A simple program to print triangles. Without arguments, it will print a right angled triangle with 3 rows')
+parser.add_argument("-t","--triangle", help="Provide type of triangle r|right, e|equilateral", choices=['right', 'r', 'equilateral', 'e']) 
+parser.add_argument("-r","--row", help="Provide number of rows", type=int)
+
+args= parser.parse_args()
+
+triangle = 0 # variable to hold choice of right or equilateral. Default is right angle
+rows = 3 # variable to hold number of rows. Default is 3 rows
 
 #print("Commandline arguments", sys.argv)
 
 #if user has given command line parameters, do sanity check and assign it to correspoinding varibles
 #or stick to default values
-if (len(sys.argv) == 1):
-	print ("Usage: python3 print_triangle <type: 0 for right, 1 for equilateral> <no. of rows>")
-	print ("Taking default values")
 
-if (len(sys.argv) > 1):
-	if(sys.argv[1].isdigit()):
-		triangle = int(sys.argv[1])
-		if ( triangle != 0 and triangle != 1):
-			triangle = 0
+if args.triangle == 'equilateral' or args.triangle == 'e':
+	triangle = 1
 
-if (len(sys.argv) > 2):
-	if(sys.argv[2].isdigit()):
-		rows = int(sys.argv[2])
+if args.row is not None:
+	rows = args.row
 	
 print ("Type of triangle", triangle, "No. of rows", rows)
 
