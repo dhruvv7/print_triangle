@@ -4,14 +4,8 @@
 #This is the code for printing traingle on screen
 #The size and type is dependent on command line arguments
 #
-#Usage: python3 print_triangle <type: 0 for right, 1 for equilateral> <no. of rows>
-#       Both the arguments are optional. 
-
-#in branch
-
-#edited the file from github UI, essentially a location other than my terminal
-
-#Now the programming starts. Will keep above comments for historic reasons
+#Usage: python3 print_triangle -h
+#       
 
 #function to print triangle. Parameters are type and number of rows
 def print_triangle(triangle, rows):
