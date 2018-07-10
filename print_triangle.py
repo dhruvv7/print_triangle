@@ -33,26 +33,46 @@ def print_triangle(triangle, rows):
 #main program starts here
 import sys
 
-triangle = 0 # variable to hold choice of right or equilateral 
-rows = 3 # variable to hold number of rows
+#referring to https://pymotw.com/3/configparser/ for help
+from configparser import ConfigParser
+from pathlib import Path
+
+#name(with location) of configuration file
+CONFIGFILE='./triangle.conf'
+
+triangle = 0 # variable to hold choice of right or equilateral. Default is right
+rows = 3 # variable to hold number of rows. Default is 3
 
 #print("Commandline arguments", sys.argv)
 
 #if user has given command line parameters, do sanity check and assign it to correspoinding varibles
 #or stick to default values
-if (len(sys.argv) == 1):
-	print ("Usage: python3 print_triangle <type: 0 for right, 1 for equilateral> <no. of rows>")
-	print ("Taking default values")
 
-if (len(sys.argv) > 1):
-	if(sys.argv[1].isdigit()):
-		triangle = int(sys.argv[1])
-		if ( triangle != 0 and triangle != 1):
-			triangle = 0
+my_file = Path(CONFIGFILE)
 
-if (len(sys.argv) > 2):
-	if(sys.argv[2].isdigit()):
-		rows = int(sys.argv[2])
+if(my_file.is_file()):
+	parser = ConfigParser()
+
+	#pass the strict=False argument if sections with same name needs to be ignored
+	#parser = ConfigParser(strict=False)
+	
+	parser.read(CONFIGFILE)
+	
+	#check if the TRIANLGE section is present
+	if(parser.has_section('TRIANGLE')):
+		section = parser['TRIANGLE']
+		
+		#check if option in the section is present
+		if(parser.has_option('TRIANGLE', 'type')):
+			#check if the value is equilateral. For rest, its default value of right
+			if(section['type'] == 'equilateral'):
+				triangle = 1
+
+		#check if options in the section are present
+		if(parser.has_option('TRIANGLE', 'rows')):
+			#check if the value is digit
+			if(section['rows'].isdigit()):
+				rows = parser.getint('TRIANGLE','rows')
 	
 print ("Type of triangle", triangle, "No. of rows", rows)
 
