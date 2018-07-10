@@ -2,16 +2,19 @@
 #Author: Dhruv Desai
 
 #This is the code for printing traingle on screen
-#The size and type is dependent on command line arguments
+#The size and type is dependent on optional configuration file triangle.conf in the same directory
+#In absence of config file or desired section, a right angled triangle with 3 rows will be printed
+#Both the parameters are optional. Single valid option will be entertained
 #
-#Usage: python3 print_triangle <type: 0 for right, 1 for equilateral> <no. of rows>
-#       Both the arguments are optional. 
-
-#in branch
-
-#edited the file from github UI, essentially a location other than my terminal
-
-#Now the programming starts. Will keep above comments for historic reasons
+#Format of triangle.conf
+#[TRIANGLE]
+#	type = <equilateral|right>
+#	rows = <no of rows in digits
+#
+#For example
+#[TRIANGLE]
+#        type = equilateral
+#        rows = 25
 
 #function to print triangle. Parameters are type and number of rows
 def print_triangle(triangle, rows):
@@ -31,7 +34,6 @@ def print_triangle(triangle, rows):
 		rows -= 1
 
 #main program starts here
-import sys
 
 #referring to https://pymotw.com/3/configparser/ for help
 from configparser import ConfigParser
@@ -43,9 +45,7 @@ CONFIGFILE='./triangle.conf'
 triangle = 0 # variable to hold choice of right or equilateral. Default is right
 rows = 3 # variable to hold number of rows. Default is 3
 
-#print("Commandline arguments", sys.argv)
-
-#if user has given command line parameters, do sanity check and assign it to correspoinding varibles
+#if config file is present, do sanity check and assign values to correspoinding varibles
 #or stick to default values
 
 my_file = Path(CONFIGFILE)
