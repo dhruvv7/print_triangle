@@ -1,4 +1,4 @@
-This project is to develop a python programme for printing triangle shape on screen. 
+This project is to develop a python program for printing triangle shape on screen. 
 
 The shape and size will vary as per inputs. 
 
